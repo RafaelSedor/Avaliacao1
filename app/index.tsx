@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
-import { Redirect } from 'expo-router'
+import { Redirect, useRouter } from 'expo-router'
 
 export default function index() {
+
+  const router = useRouter();
   return (
-     <Redirect href="/login"/> 
+      <Redirect href="/login"/> 
   )
 }
 

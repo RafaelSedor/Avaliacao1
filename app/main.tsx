@@ -43,7 +43,7 @@ export default function main() {
             fontSize: 32,
           },
           title: "Soca Rão",
-          headerRight: () => <MenuComponent />,
+          headerRight: () => <MenuComponent onMain={() => {console.log("hellow from main")}}/>,
         }}
       />
       <Text style={styles.title}>Carros a Venda</Text>

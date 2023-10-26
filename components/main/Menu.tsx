@@ -3,13 +3,19 @@ import React from "react";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import IconButton from "./IconButton";
 import { Redirect, useRouter } from "expo-router";
+import useAuth from "../../hooks/useAuth";
 
-export default function MenuComponent() {
+interface MenuComponentProps {
+  onMain: () => void;
+}
+
+export default function MenuComponent({ onMain }: MenuComponentProps) {
   const { showActionSheetWithOptions } = useActionSheet();
   const router = useRouter();
+ const { loading, user, login, logout } = useAuth();
 
 
-  const options = ["About", "Logout", "Cancel"];
+  const options = ["About", "Logout", "Cancel", "main"];
   const destructiveButtonIndex = 1;
   const cancelButtonIndex = 2;
 
@@ -20,16 +26,16 @@ export default function MenuComponent() {
         cancelButtonIndex,
         destructiveButtonIndex,
       },
-      (pressedId) => {
+      async (pressedId) => {
         switch (pressedId) {
-          
           case 0:
-            router.push("/about")
+            router.push("/about");
             console.log("About");
             break;
 
           case destructiveButtonIndex:
-             router.replace("..")
+            //  router.replace("..")
+            await logout();
             console.log("Logout");
             break;
 
@@ -37,17 +43,16 @@ export default function MenuComponent() {
             console.log("Canceled");
             // Canceled
             break;
+
+          case 3:
+            onMain();
+            break;
         }
       }
     );
   };
 
-  return (
-    <IconButton
-      iconName="bars"
-      onPress={handlePress}
-    />
-  );
+  return <IconButton iconName="bars" onPress={handlePress} />;
 }
 
 const styles = StyleSheet.create({});

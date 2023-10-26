@@ -10,12 +10,10 @@ export default function MenuComponent() {
   const router = useRouter();
 
   const logout = () => {
-    // router.replace("/");
-
+    //  router.replace("/");
 
     router.back()
     router.back()
-
 
   //   while (router.canGoBack()) {
   //     router.back()
